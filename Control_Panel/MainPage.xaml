@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewmodels="clr-namespace:Control_Panel.MVVM.ViewModels"
+             x:DataType="viewmodels:MainViewModel"
+             x:Class="Control_Panel.MainPage"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="#20262f"></toolkit:StatusBarBehavior>
+    </ContentPage.Behaviors>
+
+    <Grid>
+        <Image Source="background.jpg" Aspect="AspectFill"/>
+        <BoxView Color="#030b15" Opacity="0.86" />
+        
+        <Grid>
+            <StackLayout VerticalOptions="Center" Margin="50">
+                <Button Text="Device Menu" FontSize="Large"
+                        Command="{Binding NavigateToDevicMenuPageCommand}"/>
+            </StackLayout>
+        </Grid>
+    </Grid>
+
+
+</ContentPage>

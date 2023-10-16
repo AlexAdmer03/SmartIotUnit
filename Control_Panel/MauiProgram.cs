@@ -38,6 +38,8 @@ namespace Control_Panel
             builder.Services.AddSingleton<IotHubService>();
             builder.Services.AddSingleton<DeviceItemViewModel>();
 
+            builder.Services.AddSingleton<DateAndTimeService>();
+            builder.Services.AddSingleton<WeatherService>();
 
 #if DEBUG
             builder.Logging.AddDebug();

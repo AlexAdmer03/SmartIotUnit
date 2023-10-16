@@ -6,20 +6,58 @@
              xmlns:viewmodels="clr-namespace:Control_Panel.MVVM.ViewModels"
              x:DataType="viewmodels:SettingsViewModel"
              Title="SettingsPage"
-             Shell.NavBarIsVisible="False">
+             Shell.NavBarIsVisible="False"
+             Background="{StaticResource Black}">
 
     <ContentPage.Behaviors>
         <toolkit:StatusBarBehavior StatusBarColor="{StaticResource Black}" />
     </ContentPage.Behaviors>
 
-    <Grid ColumnDefinitions="*,*" RowDefinitions="1*, 3*, auto, 2*" ColumnSpacing="20" 
-          RowSpacing="20" Padding="20" VerticalOptions="Start">
+    <Grid ColumnDefinitions="*" RowDefinitions="1*, 3*, auto, 2*" ColumnSpacing="10" 
+          RowSpacing="30" VerticalOptions="Start" Margin="30">
         <Grid Grid.Row="0" Grid.ColumnSpan="2" ColumnDefinitions="*,*" Margin="0,0,0,0">
-            <Button Command="{Binding GoBackCommand}" Grid.Column="1" Text="&#xf00d;" 
+            <Button Command="{Binding GoBackCommand}" Grid.Column="1" Text="&#xf00d;" TextColor="{StaticResource Tertiary}" 
                     FontFamily="FontAwesomeRegular" Style="{StaticResource NavigationButton}" 
                     HorizontalOptions="End" VerticalOptions="Center" />
         </Grid>
-        
+        <VerticalStackLayout Grid.Row="1" VerticalOptions="Start">
+            <Label Text="Global Settings" TextColor="{StaticResource Gray100}" FontSize="23"
+                   Margin="0,0,0,20"/>
+
+            <Grid ColumnDefinitions="*,*">
+                <Label Grid.Column="0" Text="IP-Address" FontSize="14" TextColor="{StaticResource Gray100}" ></Label>
+                <Label Grid.Column="1" HorizontalOptions="End" Text="154.158.1.121" FontSize="14" TextColor="{StaticResource Gray400}"/>
+            </Grid>
+
+            <Grid ColumnDefinitions="*,*">
+                <Label Grid.Column="0" Text="Subnet Mask" FontSize="14" TextColor="{StaticResource Gray100}" ></Label>
+                <Label Grid.Column="1" HorizontalOptions="End" Text="144.141.344.0" FontSize="14" TextColor="{StaticResource Gray400}"/>
+            </Grid>
+
+            <Grid ColumnDefinitions="*,*">
+                <Label Grid.Column="0" Text="Gateway" FontSize="14" TextColor="{StaticResource Gray100}" ></Label>
+                <Label Grid.Column="1" HorizontalOptions="End" Text="192.168.1.1" FontSize="14" TextColor="{StaticResource Gray400}"/>
+            </Grid>
+
+            <Label Text="Azure Settings" Margin="0, 30, 0, 10" TextColor="{StaticResource Gray100}" FontSize="25"/>
+
+            <Grid ColumnDefinitions="*,*">
+                <Label Grid.Column="0" Text="Azure-Iot-Hub" FontSize="14" TextColor="{StaticResource Gray100}" ></Label>
+                <Label Grid.Column="1" HorizontalOptions="End" Text="alexadmer-iothub.azure-devices.net" FontSize="14" TextColor="{StaticResource Gray400}"/>
+            </Grid>
+
+            <Grid ColumnDefinitions="*,*">
+                <Label Grid.Column="0" Text="Shared AccessName" FontSize="14" TextColor="{StaticResource Gray100}" ></Label>
+                <Label Grid.Column="1" HorizontalOptions="End" Text="iothubowner" FontSize="14" TextColor="{StaticResource Gray400}"/>
+            </Grid>
+
+            <Grid ColumnDefinitions="*,*">
+                <Label Grid.Column="0" Text="Consumer Group" FontSize="14" TextColor="{StaticResource Gray100}" ></Label>
+                <Label Grid.Column="1" HorizontalOptions="End" Text="smart-dyson-fan-device" FontSize="14" TextColor="{StaticResource Gray400}"/>
+            </Grid>
+
+        </VerticalStackLayout>
     </Grid>
+    
 
 </ContentPage>

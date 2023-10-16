@@ -1,6 +1,7 @@
 ﻿using Control_Panel.MVVM.Models;
 using Microsoft.Azure.Devices;
 using Microsoft.Azure.Devices.Shared;
+using SharedLibrary.Services;
 using System.Diagnostics;
 
 namespace Control_Panel.Services;
@@ -11,12 +12,15 @@ public class ControlPanelDeviceManager
     private readonly RegistryManager _registryManager;
     private readonly ServiceClient _serviceClient;
     private readonly System.Timers.Timer _timer;
+    private readonly DeviceManager _deviceManager;
 
     public List<DeviceItem> Devices { get; private set; }
     public event Action DevicesUpdated;
 
-    public ControlPanelDeviceManager()
+    public ControlPanelDeviceManager(DeviceManager deviceManager)
     {
+
+        _deviceManager = deviceManager;
 
         _registryManager = RegistryManager.CreateFromConnectionString(_connectionString);
         _serviceClient = ServiceClient.CreateFromConnectionString(_connectionString);
@@ -83,7 +87,47 @@ public class ControlPanelDeviceManager
 
     public async Task SendDirectMethodAsync(string deviceId, string methodName)
     {
-        var method = new CloudToDeviceMethod(methodName);
-        await _serviceClient.InvokeDeviceMethodAsync(deviceId, method);
+        var methodInvocation = new CloudToDeviceMethod(methodName) { ResponseTimeout = TimeSpan.FromSeconds(30) };
+
+        var response = await _serviceClient.InvokeDeviceMethodAsync(deviceId, methodInvocation);
+
+        if (methodName.ToLower() == "start")
+        {
+            await UpdateDesiredPropertiesAsync(deviceId, "AllowSending", true);
+        }
+        else if (methodName.ToLower() == "stop")
+        {
+            await UpdateDesiredPropertiesAsync(deviceId, "AllowSending", false);
+        }
+        else
+        {
+            Debug.WriteLine($"Method invocation failed with status {response.Status}");
+        }
+    }
+
+    public async Task UpdateDesiredPropertiesAsync(string deviceId, string propertyName, object newValue)
+    {
+        const int maxRetries = 3;
+        for (int attempt = 1; attempt <= maxRetries; attempt++)
+        {
+            try
+            {
+                var twin = await _registryManager.GetTwinAsync(deviceId);
+                twin.Properties.Desired[propertyName] = newValue;
+                await _registryManager.UpdateTwinAsync(twin.DeviceId, twin, twin.ETag);
+
+                break;
+            }
+            catch (Microsoft.Azure.Devices.Common.Exceptions.PreconditionFailedException ex)
+            {
+                Debug.WriteLine($"ETag mismatch on attempt {attempt}: {ex.Message}");
+                Debug.WriteLine(ex.StackTrace);
+
+                if (attempt == maxRetries)
+                {
+                    throw;
+                }
+            }
+        }
     }
 }

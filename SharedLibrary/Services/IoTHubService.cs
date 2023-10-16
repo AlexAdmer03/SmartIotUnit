@@ -59,5 +59,7 @@ namespace SharedLibrary.Services
             await _serviceClient.InvokeDeviceMethodAsync(deviceId, methodInvocation);
 
         }
+
+        
     }
 }

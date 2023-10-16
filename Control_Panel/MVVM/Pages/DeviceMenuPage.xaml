@@ -12,18 +12,36 @@
         <toolkit:StatusBarBehavior StatusBarColor="{StaticResource Black}" />
     </ContentPage.Behaviors>
 
-    <Grid ColumnDefinitions="*,*" RowDefinitions="1*,3*,auto,2*,auto,2*" ColumnSpacing="20" RowSpacing="20" Padding="20" VerticalOptions="Start">
+    <Grid ColumnDefinitions="*" RowDefinitions="1*,3*,auto,2*,auto,2*" ColumnSpacing="20" RowSpacing="20" Padding="20" VerticalOptions="Start">
 
         <Grid Grid.Row="0" Grid.ColumnSpan="2" ColumnDefinitions="*,*" Margin="0,0,0,0">
-            <Button Command="{Binding GoToSettingsCommand}" Grid.Column="1" Text="&#xf141;" FontFamily="FontAwesomeRegular" Style="{StaticResource NavigationButton}" HorizontalOptions="End" VerticalOptions="Center" />
+
+            <Button Command="{Binding GoBackCommand}" Grid.Column="0" Text="&#xf053;" TextColor="{StaticResource Tertiary}" FontFamily="FontAwesomeRegular" 
+                    HorizontalOptions="Start" VerticalOptions="Center" Style="{StaticResource NavigationButton}"></Button>
+
+            <Button Command="{Binding GoToSettingsCommand}" Grid.Column="1" Text="&#xf013;" 
+                    FontFamily="FontAwesomeRegular" Style="{StaticResource NavigationButton}" 
+                    HorizontalOptions="End" VerticalOptions="Center" TextColor="{StaticResource Tertiary}"/>
         </Grid>
 
-        <Frame Grid.Row="1" Grid.ColumnSpan="2" Padding="0" BorderColor="Transparent" >
-            <Image Source="frame.jpg" Aspect="AspectFill"/>
+        <Frame Grid.Row="1" Grid.ColumnSpan="2" Padding="0" BorderColor="Transparent">
+            <Grid>
+                <!-- Image Layer -->
+                <Image Source="frame.jpg" Aspect="AspectFill"/>
+
+                <!-- Content Layer -->
+                <StackLayout Grid.Row="3" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,-80,0,0">
+                    <Label Text="{Binding CurrentTime}" TextColor="{StaticResource Black}" 
+                           FontSize="40" Margin="0,0,0,-5" HorizontalTextAlignment="Center"/>
+                   
+                    <Label Text="{Binding CurrentDate}" TextColor="{StaticResource Black}"  
+                           HorizontalTextAlignment="Center" FontSize="15"/>
+                </StackLayout>
+            </Grid>
         </Frame>
 
         <Grid Grid.Row="2" Grid.ColumnSpan="2" ColumnDefinitions="*,*">
-            <Label Grid.Column="0" Text="Quick Access" TextColor="#a8a5b0"/>
+            <Label Grid.Column="0" Text="Quick Access" TextColor="#a8a5b0" FontFamily="RubikRegular" FontSize="16"/>
             <HorizontalStackLayout Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center">
                 <HorizontalStackLayout.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding GoToAllDevicesCommand}" NumberOfTapsRequired="1" />
@@ -35,29 +53,31 @@
 
         <Frame Grid.Row="3" Grid.Column="0" BorderColor="Transparent" Padding="15" BackgroundColor="{StaticResource Secondary}">
             <Grid RowDefinitions="auto,*" ColumnDefinitions="*,*">
-                <Label Grid.Row="0" Grid.Column="0" Text="&#xe004;" Margin="0,0,0,0"  FontSize="32" FontFamily="FontAwesomeRegular" VerticalOptions="Start" />
-                <!--<Switch Toggled="Switch_Toggled" Grid.Row="0" Grid.Column="1" Margin="0,-10,-2,0" HorizontalOptions="End"  VerticalOptions="Start" />-->
+                <Label Grid.Row="0" Grid.Column="0" Text="&#xe004;" Margin="0,0,0,0"  FontSize="55" FontFamily="FontAwesomeRegular" VerticalOptions="Start" />
+                <Switch x:Name="DeviceSwitch" Grid.Row="0" Grid.Column="1" OnColor="{StaticResource Tertiary}" ThumbColor="AliceBlue"
+                        VerticalOptions="Start" IsToggled="{Binding IsFanConnected}" Toggled="DeviceSwitch_Toggled"/>
 
-
-
-                <VerticalStackLayout Grid.Row="1" Grid.ColumnSpan="2" Margin="0,15,0,0">
-                    <Label FontSize="11" TextColor="{StaticResource Gray400}" Text="Dyson" />
+                <VerticalStackLayout Grid.Row="1" Grid.ColumnSpan="2" Margin="0,15,0,0" HorizontalOptions="Center">
+                    <Label FontSize="11" TextColor="{StaticResource Gray400}" Text="Dyson" HorizontalOptions="Center"/>
                     <Label Text="Smart Fan" />
                 </VerticalStackLayout>
-
-
             </Grid>
         </Frame>
 
-        <Frame Grid.Row="3" Grid.Column="1" BackgroundColor="{StaticResource Secondary}" BorderColor="Transparent">
-            
-        </Frame>
 
-        <Label Grid.Row="4"  Grid.ColumnSpan="2" Text="Favorite Device" FontSize="16" FontFamily="RubikRegular" TextColor="{StaticResource White}" VerticalOptions="Center" />
+
+        <Label Grid.Row="4"  Grid.ColumnSpan="2" Text="Weather" FontSize="16" 
+               FontFamily="RubikRegular" TextColor="#a8a5b0" VerticalOptions="Center"/>
 
         <Frame Grid.Row="5" Grid.ColumnSpan="2" BackgroundColor="{StaticResource Secondary}" BorderColor="Transparent"
                HeightRequest="100">
-            
+            <HorizontalStackLayout Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center">
+                <Label Text="{Binding CurrentWeatherCondition}" FontFamily="FontAwesomeSolid" TextColor="#aeb0b4" FontSize="45" 
+            Margin="0,0,10,0"/>
+                <Label Text="{Binding CurrentTemperature}" FontFamily="RubikRegular" TextColor="#aeb0b4" FontSize="35"/>
+                <Label Text="{Binding CurrentTemperatureUnit}" FontFamily="RubikRegular" TextColor="#aeb0b4" FontSize="35"
+                       Margin="5,0,0,0"/>
+            </HorizontalStackLayout>
         </Frame>
 
     </Grid>

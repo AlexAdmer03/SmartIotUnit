@@ -5,11 +5,21 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodels="clr-namespace:Control_Panel.MVVM.ViewModels"
              x:DataType="viewmodels:SettingsViewModel"
-             Title="SettingsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="SettingsPage"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{StaticResource Black}" />
+    </ContentPage.Behaviors>
+
+    <Grid ColumnDefinitions="*,*" RowDefinitions="1*, 3*, auto, 2*" ColumnSpacing="20" 
+          RowSpacing="20" Padding="20" VerticalOptions="Start">
+        <Grid Grid.Row="0" Grid.ColumnSpan="2" ColumnDefinitions="*,*" Margin="0,0,0,0">
+            <Button Command="{Binding GoBackCommand}" Grid.Column="1" Text="&#xf00d;" 
+                    FontFamily="FontAwesomeRegular" Style="{StaticResource NavigationButton}" 
+                    HorizontalOptions="End" VerticalOptions="Center" />
+        </Grid>
+        
+    </Grid>
+
 </ContentPage>

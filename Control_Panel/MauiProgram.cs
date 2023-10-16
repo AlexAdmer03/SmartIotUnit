@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Maui;
 using Control_Panel.MVVM.Pages;
 using Control_Panel.MVVM.ViewModels;
+using Control_Panel.Services;
 using Microsoft.Extensions.Logging;
+using SharedLibrary.Services;
 
 namespace Control_Panel
 {
@@ -19,6 +21,7 @@ namespace Control_Panel
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                     fonts.AddFont("fa-solid-900.ttf", "FontAwesomeSolid");
                     fonts.AddFont("fa-regular-400.ttf", "FontAwesomeRegular");
+                    fonts.AddFont("Rubik-Regular.ttf", "RubikRegular");
 
                 });
 
@@ -30,6 +33,10 @@ namespace Control_Panel
             builder.Services.AddSingleton<SettingsViewModel>();
             builder.Services.AddSingleton<AllDevicesPage>();
             builder.Services.AddSingleton<AllDevicesViewModel>();
+            builder.Services.AddSingleton<DeviceManager>();
+            builder.Services.AddSingleton<ControlPanelDeviceManager>();
+            builder.Services.AddSingleton<IotHubService>();
+            builder.Services.AddSingleton<DeviceItemViewModel>();
 
 
 #if DEBUG

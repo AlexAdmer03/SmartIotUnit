@@ -4,10 +4,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartIotUnit", "SmartIotUnit\SmartIotUnit.csproj", "{3D48B458-44BA-4B04-BA25-010BF8DCC2E7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{782C82F7-0FB5-46CA-9909-F6181EC8AB84} = {782C82F7-0FB5-46CA-9909-F6181EC8AB84}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedLibrary", "SharedLibrary\SharedLibrary.csproj", "{782C82F7-0FB5-46CA-9909-F6181EC8AB84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Control_Panel", "Control_Panel\Control_Panel.csproj", "{D760C0FD-0CD1-4A8D-889A-19DA8210EFC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Control_Panel", "Control_Panel\Control_Panel.csproj", "{D760C0FD-0CD1-4A8D-889A-19DA8210EFC9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{782C82F7-0FB5-46CA-9909-F6181EC8AB84} = {782C82F7-0FB5-46CA-9909-F6181EC8AB84}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

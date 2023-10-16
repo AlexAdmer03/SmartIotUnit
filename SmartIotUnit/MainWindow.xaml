@@ -24,7 +24,7 @@
         </Grid>
 
         <TextBlock x:Name="ConnectivityStatus" Grid.Row="1" HorizontalAlignment="Center" Margin="5 20" Text="Disconnected" />
-        </Grid>
+    </Grid>
 
 
         <Window.Resources>

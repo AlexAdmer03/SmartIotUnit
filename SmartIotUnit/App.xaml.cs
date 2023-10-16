@@ -1,9 +1,12 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SharedLibrary.Services;
 using SmartIotUnit.Models.Devices;
 using SmartIotUnit.Services;
 using System.Windows;
+using DeviceManager = SmartIotUnit.Services.DeviceManager;
+using NetworkManager = SmartIotUnit.Services.NetworkManager;
 
 namespace SmartIotUnit
 {
@@ -27,6 +30,7 @@ namespace SmartIotUnit
                     services.AddSingleton(new DeviceConfiguration(config.Configuration.GetConnectionString("Device")!));
                     services.AddSingleton<DeviceManager>();
                     services.AddSingleton<NetworkManager>();
+                    services.AddSingleton<IotHubService>();
                 })
                 .Build();
         }

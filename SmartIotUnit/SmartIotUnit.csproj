@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Maui" Version="6.0.0" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
     <PackageReference Include="Microsoft.Azure.Devices.Client" Version="1.42.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
@@ -46,6 +45,7 @@
     <Content Include="Resources\Fonts\fa-regular-400.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <ProjectReference Include="..\SharedLibrary\SharedLibrary.csproj" />
     <Resource Include="Resources\Fonts\fa-sharp-light-300.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
